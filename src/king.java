@@ -27,7 +27,11 @@ public class king extends piece {
       for(int i = 0;i<8;i++){
        for(int j = 0;j<8;j++){
         if(board.board[i][j] != null &&board.board[i][j].isMoveLegal(board, row, col) && board.board[i][j].IsBlack != this.IsBlack) return true ; // the row and col are the king's currant coordinates
+        if(board.board[i][j] != null && board.board[i][j].CanMakeThemove(board, row, col) && board.board[i][j].IsBlack != this.IsBlack) return true ; // the row and col are the king's currant coordinates
       // short circut evaluation
+      // this may sound weird but a pinned piece can deliver a check (also chekmate ) so we should use 
+      //can makethemove insted of isMoveLegal cz even if a move was't legal (cz it was pinned)
+      // is still checks the king 
     }
       }
 

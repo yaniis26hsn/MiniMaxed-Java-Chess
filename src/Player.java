@@ -12,6 +12,10 @@ public class Player {
         int fromCol = 1 ;  // just initilisation
         int toRow  =  2;
         int toCol =  1;
+        int fromRow = 6 ;
+        int fromCol = 4 ;  // just initilisation
+        int toRow  =  4;
+        int toCol =  4;
         do{
         // gui implementation
         // using getAllPossible moves function in piece class when the user clicks on a piece 
