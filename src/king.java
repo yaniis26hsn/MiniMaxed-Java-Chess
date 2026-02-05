@@ -26,7 +26,6 @@ public class king extends piece {
       // if there wasn't , this means there is no check ,we we will return false 
       for(int i = 0;i<8;i++){
        for(int j = 0;j<8;j++){
-        if(board.board[i][j] != null &&board.board[i][j].isMoveLegal(board, row, col) && board.board[i][j].IsBlack != this.IsBlack) return true ; // the row and col are the king's currant coordinates
         if(board.board[i][j] != null && board.board[i][j].CanMakeThemove(board, row, col) && board.board[i][j].IsBlack != this.IsBlack) return true ; // the row and col are the king's currant coordinates
       // short circut evaluation
       // this may sound weird but a pinned piece can deliver a check (also chekmate ) so we should use 
