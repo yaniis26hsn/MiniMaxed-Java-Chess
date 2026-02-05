@@ -8,10 +8,6 @@ public class Player {
 
 
     int[] getPlayerMove(Board board){
-        int fromRow = 1 ;
-        int fromCol = 1 ;  // just initilisation
-        int toRow  =  2;
-        int toCol =  1;
         int fromRow = 6 ;
         int fromCol = 4 ;  // just initilisation
         int toRow  =  4;
