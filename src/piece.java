@@ -18,6 +18,7 @@ public abstract  class piece {
          // this fnc as it name indicates it doesn t change theBoard it only check if we do that move
          
   boolean isMoveLegal(Board board , int DestRow , int DestCol){
+    
       return (!isPinnedMove(board, DestRow, DestCol) && this.CanMakeThemove(board, DestRow, DestCol) ) ;
    }
    boolean isPinnedMove(Board board,int DestRow ,int DestCol){

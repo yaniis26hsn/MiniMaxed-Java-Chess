@@ -17,8 +17,9 @@ public class Player {
         // using getAllPossible moves function in piece class when the user clicks on a piece 
         // show him the squars where he can go to using that selected piece 
         // i verifying that this move legal before returnig it by putting this in a do while
-        }while(!board.board[fromRow][fromCol].isMoveLegal(board, toRow, toCol)) ;
-        
+        }while(board.board[fromRow][fromCol] == null || !board.board[fromRow][fromCol].isMoveLegal(board, toRow, toCol)) ;
+        // like this we won't need to check board.board[fromRow][fromCol] != null inside of isMoveLegal and
+        // also inside each canMaketheMove 
 
       int[] move = new int[]{fromRow,fromCol,toRow,toCol} ;
         return move ;

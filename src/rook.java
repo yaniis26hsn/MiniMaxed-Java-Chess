@@ -1,11 +1,12 @@
 import static java.lang.Math.* ;
 public class rook extends piece{
+      boolean DidnotMove = true ; // it means he havent mooved yet
      public rook (int row , int col,boolean isBlack) {
         super(row, col , isBlack) ;
         value = 5 ;
     }
     
-
+    @Override
     boolean CanMakeThemove(Board board,int DestRow, int DestCol){
       if(board.board[DestRow][DestCol] != null) {
          if(IsBlack == board.board[DestRow][DestCol].IsBlack) return false ;

@@ -1,5 +1,4 @@
 import static java.lang.Math.*;
-
 import java.util.ArrayList;
 
 
@@ -54,13 +53,13 @@ int[] getPlayerMove(Board board) {
    
        
 
- if(depth == 0 || board.status == Board.GameState.BlackWon || board.status == board.status.WhiteWon ||board.status == board.status.OverDraw ) {
+ if(depth == 0 || board.status == Board.GameState.BlackWon || board.status == Board.GameState.WhiteWon ||board.status == Board.GameState.OverDraw ) {
        return board.evaluateBoardForAPlayer(isBlack) ;
         // we could check here if game over we give infinity(Integer.Max or Min or 0 if draw) as usual algorithms 
         // but since i gave the kings very high evalution , we get to the same point by calling this fnc 
     } else if(maximazing){
       int maxEvaluation = Integer.MIN_VALUE ; // represents -infinity 
-      int tmpEval = 0 ;
+      int tmpEval  ;
 
       int[][] moves = getAllPossibleMoves(board , isBlack) ;
       for (int i = 0; i < moves.length; i++) {

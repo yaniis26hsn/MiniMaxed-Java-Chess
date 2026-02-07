@@ -11,7 +11,7 @@ public class pawn extends piece {
     }
      
     
-    
+    @Override
     boolean CanMakeThemove(Board board,int DestRow, int DestCol){
     
       if(board.board[DestRow][DestCol] != null) {

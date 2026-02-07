@@ -81,7 +81,7 @@ public class Board {
 
       // case 2 : insuffisiant material
       int PiecesValueSum = 0 ;
-      boolean insuffisiantMaterial = false; // just an initialization
+     
       piece lastPiece = null ;
       piece lasterPiece = null ; // laster is not an english word but it refers to the one the two last non king found piece
       
@@ -177,6 +177,33 @@ public class Board {
     void makeMove(piece ThePiece,int DestRow ,int DestCol,Player player){
      
      if(ThePiece.isMoveLegal(this, DestRow, DestCol)){
+       if(ThePiece instanceof king && board[DestRow][DestCol] != null && ThePiece.IsBlack == board[DestRow][DestCol].IsBlack){
+        // since you could take your own piece (by returning isMoveLegale a true value) it means you were castiling
+           ((king) ThePiece).DidntMove = false ;
+              ( (rook) board[DestRow][DestCol]).DidnotMove = false ;
+               piece ThatRook = this.board[DestRow][DestCol] ;
+               this.lastCapture++ ;
+               if(DestCol == 7){
+                board[DestRow][4] = ThatRook ;
+                board[DestRow][7] = null ;
+                board[DestRow][6] = ThePiece ; // the king was saved in the params (Thepiece) not like the rook
+               // no need to modify the row in castling 
+               ThatRook.col = 4 ;
+               ThePiece.col = 6 ;
+              }else{ // destCol == 0 castling queen side 
+
+                board[DestRow][4] = null ;
+                board[DestRow][0] = null ;
+                board[DestRow][2] = ThePiece ;
+                board[DestRow][3] = ThatRook ;
+                 ThatRook.col = 3 ;
+                 ThePiece.col = 2 ;
+
+               }
+               this.DesactivateEnPassant(); 
+            
+      }else{
+        
        piece oldPiece = this.board[DestRow][DestCol] ;
         this.lastCapture = (oldPiece == null || !(ThePiece instanceof pawn)) ? ++this.lastCapture : 0 ;
         // we had to put the ++ before the var otherwise it will assign the old value before incrementation
@@ -187,7 +214,8 @@ public class Board {
           this.status =   (ThePiece.IsBlack== true) ?  GameState.BlackWon:  GameState.WhiteWon ;
    
                 }
-
+                if(ThePiece instanceof king) ((king) ThePiece).DidntMove = false ;
+                if(ThePiece instanceof rook) ((rook) ThePiece).DidnotMove = false ;
             
            int oldCol = ThePiece.col ;
            int oldRow = ThePiece.row ;
@@ -204,6 +232,8 @@ public class Board {
 
             this.DesactivateEnPassant();
             
+      }
+
      }
     else{System.out.println("Error: can't make that move");} 
     // later we may turn this to an exeption 

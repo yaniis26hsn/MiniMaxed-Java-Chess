@@ -5,6 +5,7 @@ public class knight extends piece {
         super(row, col , isBlack) ;
         value = 3 ;
     }
+    @Override
      boolean CanMakeThemove(Board board,int DestRow, int DestCol){
 
       if(board.board[DestRow][DestCol] != null) {
