@@ -52,7 +52,8 @@ public class Main {
          // no need to check that it is legal
           board.makeMove(board.board[move[0]][move[1]] ,move[2], move[3],Player1);
           board.showBoard(); 
-          if(board.getGameState(Player1.isBlack) != Board.GameState.Draw) break ;
+          if(board.getGameState(Player2.isBlack) != Board.GameState.Draw) break ;
+          // we need to check for player 2 if he can play the next move 
           else{
             do { 
             move = Player2.getPlayerMove(board) ;
