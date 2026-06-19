@@ -12,7 +12,7 @@ public class king extends piece {
     @Override
      boolean CanMakeThemove(Board board,int DestRow, int DestCol)
     {
-       boolean normalMove = ((DestRow != row || DestCol != col) && (abs(DestCol - col)<=1 && abs(DestRow - row) <=1) && (board.board[DestRow][DestCol] != null && board.board[DestRow][DestCol].IsBlack != this.IsBlack)) ;
+       boolean normalMove = ((DestRow != row || DestCol != col) && (abs(DestCol - col)<=1 && abs(DestRow - row) <=1) && ((board.board[DestRow][DestCol] != null && board.board[DestRow][DestCol].IsBlack != this.IsBlack) || (board.board[DestRow][DestCol] == null ) )) ;
         if(normalMove) return true ;
          else if(DidntMove && (DestCol == 7 || DestCol == 0) && (DestRow==row) && board.board[DestRow][DestCol] != null && board.board[DestRow][DestCol] instanceof rook && board.board[DestRow][DestCol].IsBlack == this.IsBlack  &&( (rook) board.board[DestRow][DestCol]).DidnotMove && !this.isChecked(board)){
            // that condition means that the player wanned to castle by choosing to move his king to his rook
@@ -30,11 +30,11 @@ public class king extends piece {
                 }
             }
            }
-            
+            return true ;
          }else if( board.board[DestRow][DestCol] != null && this.IsBlack == board.board[DestRow][DestCol].IsBlack) return false ; 
          // since it wasn't castling you can't take your own piece (not litterally)
          
-       
+         
           
     
         return false ; // nor normal move nor castling ,
