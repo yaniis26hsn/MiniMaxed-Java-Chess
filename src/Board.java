@@ -207,7 +207,7 @@ public class Board {
           this.board[ThePiece.row][DestCol] = null ;
         }   
        piece oldPiece = this.board[DestRow][DestCol] ;
-        this.lastCapture = (oldPiece == null || !(ThePiece instanceof pawn)) ? ++this.lastCapture : 0 ;
+        this.lastCapture = (oldPiece != null || (ThePiece instanceof pawn)) ? 0 : ++this.lastCapture ;
         // we had to put the ++ before the var otherwise it will assign the old value before incrementation
         // than it will increment . it will work too since it is same var in both sides , but like this it seems better
         
