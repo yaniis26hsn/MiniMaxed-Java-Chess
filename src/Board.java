@@ -203,7 +203,9 @@ public class Board {
                this.DesactivateEnPassant(); 
             
       }else{
-        
+         if(ThePiece instanceof pawn && ThePiece.row != DestRow && this.board[DestRow][DestCol] == null ){
+          this.board[ThePiece.row][DestCol] = null ;
+        }   
        piece oldPiece = this.board[DestRow][DestCol] ;
         this.lastCapture = (oldPiece == null || !(ThePiece instanceof pawn)) ? ++this.lastCapture : 0 ;
         // we had to put the ++ before the var otherwise it will assign the old value before incrementation
@@ -231,6 +233,7 @@ public class Board {
              ((pawn) ThePiece).Promote(this,DestRow,DestCol,player)  ;
 
             this.DesactivateEnPassant();
+         
             
       }
 
