@@ -22,10 +22,14 @@ public abstract  class piece {
       return (!isPinnedMove(board, DestRow, DestCol) && this.CanMakeThemove(board, DestRow, DestCol) ) ;
    }
    boolean isPinnedMove(Board board,int DestRow ,int DestCol){
-    // this sees if the move is not legal cz the piece is pinned 
-      Board tempBoard = new Board(board) ;
-      tempBoard.board[row][col] = null ;
-     tempBoard.board[DestRow][DestCol] = this ;
+     // this sees if the move is not legal cz the piece is pinned 
+       if(this instanceof king && row == DestRow && (DestCol == 0 || DestCol == 7) && board.board[DestRow][DestCol] instanceof rook && board.board[DestRow][DestCol].IsBlack == this.IsBlack) return false ; // this means
+       // that we are castling , this means that checking if the move is pinned is wrong first cz the king won't go to DestRow/Col 
+       // second cz canMakeMove will check everything in castling case , so we will return false here (not pinned move) and then it will be legal in case 
+       // canMakeMove will return true  
+       Board tempBoard = new Board(board) ;
+       tempBoard.board[row][col] = null ;
+      tempBoard.board[DestRow][DestCol] = this ;
      
    // i wanted to do : return getKing(tempBoard,this.IsBlack).isChecked(tempBoard) ;
    // but there would have an exception in case of that getKing will return null which is technically impossible
