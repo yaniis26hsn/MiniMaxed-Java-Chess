@@ -31,17 +31,21 @@ A fully-functional chess engine built in Java using Object-Oriented Programming 
 ## Project Structure
 
 ```
-├── piece.java           # Abstract base class for all pieces
-├── pawn.java           # Pawn implementation with promotion logic
-├── rook.java           # Rook implementation
-├── knight.java         # Knight implementation
-├── elephant.java       # Bishop implementation
-├── queen.java          # Queen implementation (delegates to rook + bishop)
-├── king.java           # King implementation with check detection
-├── Board.java          # Game board state and management
-├── Player.java         # Base player class (human)
-├── AiPlayer.java       # AI player with minimax implementation
-├── Main.java           # Game loop and mode selection
+├── pom.xml             # Maven build configuration
+├── src/
+│   ├── main/java/
+│   │   ├── piece.java       # Abstract base class for all pieces
+│   │   ├── pawn.java        # Pawn implementation with promotion logic
+│   │   ├── rook.java        # Rook implementation
+│   │   ├── knight.java      # Knight implementation
+│   │   ├── elephant.java    # Bishop implementation
+│   │   ├── queen.java       # Queen implementation (delegates to rook + bishop)
+│   │   ├── king.java        # King implementation with check detection
+│   │   ├── Board.java       # Game board state and management
+│   │   ├── Player.java      # Base player class (human)
+│   │   ├── AiPlayer.java    # AI player with minimax implementation
+│   │   └── Main.java        # Game loop and mode selection
+│   └── test/java/           # Test directory (empty, ready for tests)
 └── README.md           # This file
 ```
 
@@ -73,7 +77,12 @@ A fully-functional chess engine built in Java using Object-Oriented Programming 
 
 ### Compilation
 ```bash
-javac *.java
+mvn compile
+```
+
+Or without Maven:
+```bash
+javac -d out src/main/java/*.java
 ```
 
 ### Running
