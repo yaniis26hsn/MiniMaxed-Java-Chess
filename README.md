@@ -83,6 +83,7 @@ mvn compile
 Or without Maven:
 ```bash
 javac -d out src/main/java/*.java
+xcopy /E /I /Y src\main\resources\* out
 ```
 
 ### Running

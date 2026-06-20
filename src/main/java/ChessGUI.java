@@ -4,7 +4,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +53,9 @@ public class ChessGUI extends JFrame {
         for (int c = 0; c < 2; c++) {
             for (int p = 0; p < 6; p++) {
                 try {
-                    BufferedImage img = ImageIO.read(new File("pics/" + COLOR_NAMES[c] + "_" + PIECE_NAMES[p] + ".png"));
+                    java.net.URL url = getClass().getResource("/pics/" + COLOR_NAMES[c] + "_" + PIECE_NAMES[p] + ".png");
+                    if (url == null) continue;
+                    BufferedImage img = ImageIO.read(url);
                     if (img != null) {
                         Image tmp = img.getScaledInstance(SQUARE_SIZE - 10, SQUARE_SIZE - 10, Image.SCALE_SMOOTH);
                         BufferedImage resized = new BufferedImage(SQUARE_SIZE - 10, SQUARE_SIZE - 10, BufferedImage.TYPE_INT_ARGB);
