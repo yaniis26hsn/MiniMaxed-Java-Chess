@@ -1,5 +1,7 @@
 
 
+import javax.swing.*;
+
 public class Player {
     boolean isBlack ;
     boolean myTurn ; // mostly useless but anyways
@@ -26,8 +28,13 @@ public class Player {
        
     }
       pawn.promotionPiece getPromotionPiece(){
-        // gui must be handled
-       return pawn.promotionPiece.Queen ; // just a temprary val
+        String[] options = {"Queen", "Rook", "Elephant", "Knight"};
+        int choice = JOptionPane.showOptionDialog(null,
+            "Promote pawn to:", "Promotion",
+            JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
+            null, options, options[0]);
+        if (choice < 0) return pawn.promotionPiece.Queen;
+        return pawn.promotionPiece.values()[choice];
       }
       
 

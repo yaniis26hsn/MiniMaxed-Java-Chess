@@ -11,8 +11,8 @@ public class Main {
         }
         public static void main(String[] args) {
           
-      
        
+        
         Board board = new Board() ;
         // there would be two ways to play : single player with differant levels (the depth of minimax)
         // and two players mode 

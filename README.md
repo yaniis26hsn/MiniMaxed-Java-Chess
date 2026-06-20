@@ -86,11 +86,13 @@ javac -d out src/main/java/*.java
 ```
 
 ### Running
+
+GUI mode (recommended):
 ```bash
-mvn exec:java -Dexec.mainClass="Main"
+java -cp out ChessGUI
 ```
 
-Or without Maven:
+Console mode (original game loop with stubs):
 ```bash
 java -cp out Main
 ```
