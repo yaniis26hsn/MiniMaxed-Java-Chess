@@ -87,7 +87,12 @@ javac -d out src/main/java/*.java
 
 ### Running
 ```bash
-java Main
+mvn exec:java -Dexec.mainClass="Main"
+```
+
+Or without Maven:
+```bash
+java -cp out Main
 ```
 
 ### Current State
