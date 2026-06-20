@@ -105,7 +105,7 @@ public class Board {
         if(PiecesValueSum < 2000000004) return true ; // we are sure we have no pawns
         // if we arrived here we are sure that no stalemate no checkmate and we have exactly two 3 points valued piece(bishop/elephant)
         
-        if(lastPiece instanceof elephant && lasterPiece instanceof elephant && ((lasterPiece.IsBlack && lastPiece.IsBlack)||(!lasterPiece.IsBlack && !lastPiece.IsBlack) )) return true ;
+        if(lastPiece instanceof elephant && lasterPiece instanceof elephant && lastPiece.IsBlack != lasterPiece.IsBlack && (lastPiece.row + lastPiece.col) % 2 == (lasterPiece.row + lasterPiece.col) % 2) return true ;
         else return false ;
       
     }
