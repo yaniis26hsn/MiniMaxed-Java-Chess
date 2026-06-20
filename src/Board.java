@@ -119,7 +119,7 @@ public class Board {
       return GameState.Draw ; // the basic state (if the game wasn t over)
     
     }
-    public Board(Board board){
+   public Board(Board board){
       this.status = board.status ;
       this.lastCapture = board.lastCapture ;
       if(board.possibleEnPassentPawn != null)
@@ -128,29 +128,28 @@ public class Board {
       for(int i = 0 ; i<8 ; i++){
         for(int j = 0 ; j<8 ; j++){
           if(board.board[i][j] == null) this.board[i][j] = null ;
-         else if(board.board[i][j] instanceof pawn){
-            this.board[i][j] = new pawn(board.board[i][j].row,board.board[i][j].col,board.board[i][j].IsBlack)  ;
-          }
-           else if(board.board[i][j] instanceof elephant){
-            this.board[i][j] = new elephant(board.board[i][j].row,board.board[i][j].col,board.board[i][j].IsBlack)  ;
-          }
-           else if(board.board[i][j] instanceof queen){
-            this.board[i][j] = new queen(board.board[i][j].row,board.board[i][j].col,board.board[i][j].IsBlack)  ;
-          }
-           else if(board.board[i][j] instanceof rook){
-            this.board[i][j] = new rook(board.board[i][j].row,board.board[i][j].col,board.board[i][j].IsBlack)  ;
-          }
-           else if(board.board[i][j] instanceof knight){
-            this.board[i][j] = new knight(board.board[i][j].row,board.board[i][j].col,board.board[i][j].IsBlack)  ;
-          }
-          else if(board.board[i][j] instanceof king){
-            this.board[i][j] = new king(board.board[i][j].row,board.board[i][j].col,board.board[i][j].IsBlack)  ;
-          }
-          else if(i==this.possibleEnPassentPawn.row && j==this.possibleEnPassentPawn.col){
-            this.board[i][j] = this.possibleEnPassentPawn ;
-            // this need to be the after adding a new pawn object so it gets replaced by that exact special pawn that moved two squares 
-            // this is necessary cz it need to be the same object so when we compare them in canMakeMove it will give true 
-          }
+          else if(board.board[i][j] instanceof pawn){
+             if(board.possibleEnPassentPawn != null && board.board[i][j] == board.possibleEnPassentPawn) {
+               this.board[i][j] = this.possibleEnPassentPawn ;
+             } else {
+               this.board[i][j] = new pawn(board.board[i][j].row,board.board[i][j].col,board.board[i][j].IsBlack) ;
+             }
+           }
+            else if(board.board[i][j] instanceof elephant){
+             this.board[i][j] = new elephant(board.board[i][j].row,board.board[i][j].col,board.board[i][j].IsBlack)  ;
+           }
+            else if(board.board[i][j] instanceof queen){
+             this.board[i][j] = new queen(board.board[i][j].row,board.board[i][j].col,board.board[i][j].IsBlack)  ;
+           }
+            else if(board.board[i][j] instanceof rook){
+             this.board[i][j] = new rook(board.board[i][j].row,board.board[i][j].col,board.board[i][j].IsBlack)  ;
+           }
+            else if(board.board[i][j] instanceof knight){
+             this.board[i][j] = new knight(board.board[i][j].row,board.board[i][j].col,board.board[i][j].IsBlack)  ;
+           }
+           else if(board.board[i][j] instanceof king){
+             this.board[i][j] = new king(board.board[i][j].row,board.board[i][j].col,board.board[i][j].IsBlack)  ;
+           }
           
         }
       }
@@ -189,11 +188,11 @@ public class Board {
                piece ThatRook = this.board[DestRow][DestCol] ;
                this.lastCapture++ ;
                if(DestCol == 7){
-                board[DestRow][4] = ThatRook ;
+                board[DestRow][5] = ThatRook ;
                 board[DestRow][7] = null ;
                 board[DestRow][6] = ThePiece ; // the king was saved in the params (Thepiece) not like the rook
                // no need to modify the row in castling 
-               ThatRook.col = 4 ;
+               ThatRook.col = 5 ;
                ThePiece.col = 6 ;
               }else{ // destCol == 0 castling queen side 
 
@@ -209,7 +208,7 @@ public class Board {
             
       }else{
          if(ThePiece instanceof pawn && ThePiece.row != DestRow && this.board[DestRow][DestCol] == null ){
-          this.board[ThePiece.row][DestCol] = null ;
+          this.board[ThePiece.row][DestCol] = null ; // clearing the piece taken by en passant from the board
         }   
        piece oldPiece = this.board[DestRow][DestCol] ;
         this.lastCapture = (oldPiece != null || (ThePiece instanceof pawn)) ? 0 : ++this.lastCapture ;
@@ -236,8 +235,9 @@ public class Board {
             // and you may store the old boards if the player wants to undo a move 
         if(ThePiece instanceof pawn && (ThePiece.IsBlack && DestRow == 7 || !ThePiece.IsBlack && DestRow == 0 ))
              ((pawn) ThePiece).Promote(this,DestRow,DestCol,player)  ;
-
-            this.DesactivateEnPassant();
+       if(!(ThePiece instanceof pawn && Math.abs(oldRow - ThePiece.row)==2)) // if a pawn has moved 2 squares, no DesactivateEnpassant 
+        { this.DesactivateEnPassant();}
+           
          
             
       }
