@@ -146,6 +146,11 @@ public class Board {
           else if(board.board[i][j] instanceof king){
             this.board[i][j] = new king(board.board[i][j].row,board.board[i][j].col,board.board[i][j].IsBlack)  ;
           }
+          else if(i==this.possibleEnPassentPawn.row && j==this.possibleEnPassentPawn.col){
+            this.board[i][j] = this.possibleEnPassentPawn ;
+            // this need to be the after adding a new pawn object so it gets replaced by that exact special pawn that moved two squares 
+            // this is necessary cz it need to be the same object so when we compare them in canMakeMove it will give true 
+          }
           
         }
       }
