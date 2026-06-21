@@ -26,7 +26,7 @@ public class elephant extends piece {
         // now we check if there was nothing between the two squars since the the elephant can t jump
      int distance = abs(DestRow - row) ; // the diagnol(or anti diagnol) distance we were able to use col too since we have checked before 
        // that it is a diagnol move  this means abs(DestCol - col)==abs(row - DestRow)
-        if( (DestRow - row)/(DestCol - col) == -1) {
+        if( (DestRow - row)/(DestCol - col) != -1) {
           // we have checked that DestCol - col != 0 up there 
             /*diagnol */
           
